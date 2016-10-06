@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.almacenfotos.almacenfotos1.CamaraFragment"
+    android:layout_margin="0dp"
+    android:background="#31352e"
+    >
+
+<!--
+    <ImageView
+        android:id="@+id/imgCamara"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="0dp"
+        android:background="#fff"
+        android:padding="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY" />
+-->
+
+    <ImageView
+        android:id="@+id/imgCamara"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="0dp"
+        android:background="#fff"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="3dp"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:id="@+id/BarraBtnSinBorde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:layout_alignParentBottom="true"
+        android:divider="?android:dividerVertical">
+
+        <EditText
+            android:id="@+id/txtDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000"
+            android:alpha="0.7"
+            android:gravity="top|start"
+            android:hint="Aqui la descripcion"
+            android:lines="1"
+            android:textColor="#fff"
+            android:textColorHint="#F2F3F4"
+            android:padding="16dp"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <ImageButton android:id="@+id/btnEnviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Enviar"
+            android:background="#D0D3D4"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_send"
+            style="?android:borderlessButtonStyle"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

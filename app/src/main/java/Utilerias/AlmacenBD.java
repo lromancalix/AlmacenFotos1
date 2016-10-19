@@ -10,7 +10,7 @@ public class AlmacenBD  {
 
     public static abstract  class TablaDatos implements BaseColumns {
         /**
-         * Nombre de la tabla
+         * Nombre de la tabla calix
          */
         public static final String _nombreTabla ="tblDatos";
         /**

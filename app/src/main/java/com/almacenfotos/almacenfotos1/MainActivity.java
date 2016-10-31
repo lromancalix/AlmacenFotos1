@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,23 +82,49 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_arribo) {
+        if (id == R.id.nav_arribo) {//llamada de arribos
             FotosArriboFragment fotosArribo = new FotosArriboFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace( R.id.content_main, fotosArribo ).commit();
-        } else if (id == R.id.nav_gallery) {
-
-            CamaraFragment camaraFragment = new CamaraFragment();
+        } else if (id == R.id.menuArrivoGaleria) {
+            PrevioGaleriaFragmet previoGaleriaFragmet = new PrevioGaleriaFragmet();
             FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.content_main,camaraFragment).commit();
+            Bundle args = new Bundle();
+            args.putString("tipo", "1");
+            previoGaleriaFragmet.setArguments(args);
+            manager.beginTransaction().replace(R.id.content_main, previoGaleriaFragmet).commit();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.menuPrevioCamara) { //llamada de previos
+            PrevioCamaraFragmet previoCamaraFragmet = new PrevioCamaraFragmet();
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_main,previoCamaraFragmet).commit();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.menuPrevioGaleria) {
+            PrevioGaleriaFragmet previoGaleriaFragmet = new PrevioGaleriaFragmet();
+            FragmentManager manager = getSupportFragmentManager();
+            Bundle args = new Bundle();
+            args.putString("tipo", "3");
+            previoGaleriaFragmet.setArguments(args);
+            manager.beginTransaction().replace(R.id.content_main, previoGaleriaFragmet).commit();
 
-        } else if (id == R.id.nav_share) {
+        }else if (id== R.id.menuSalidaCamara){
 
-        } else if (id == R.id.nav_send) {
+            SalidaCamaraFragment SalidaCamaraFragment = new SalidaCamaraFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_main,SalidaCamaraFragment).commit();
+
+        }else if (id == R.id.menuSalidaGaleria) {
+            PrevioGaleriaFragmet previoGaleriaFragmet = new PrevioGaleriaFragmet();
+            FragmentManager manager = getSupportFragmentManager();
+            Bundle args = new Bundle();
+            args.putString("tipo", "2");
+            previoGaleriaFragmet.setArguments(args);
+            manager.beginTransaction().replace(R.id.content_main, previoGaleriaFragmet).commit();
+
+        }else if (id == R.id.menuEnvioPendiente) {
+            EnvioPendienteFragment envioPendienteFragment = new EnvioPendienteFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_main,envioPendienteFragment).commit();
 
         }
 

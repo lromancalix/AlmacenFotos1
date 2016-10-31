@@ -1,6 +1,5 @@
 package com.almacenfotos.almacenfotos1;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -36,7 +35,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CamaraFragment extends Fragment {
+public class PrevioCamaraFragmet extends Fragment {
 
     View _rootView;
     Context _context;
@@ -52,7 +51,7 @@ public class CamaraFragment extends Fragment {
 
     //private PhotoUtils photoUtils;
 
-    public CamaraFragment() {
+    public PrevioCamaraFragmet() {
         // Required empty public constructor
     }
 
@@ -61,38 +60,38 @@ public class CamaraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         _context = container.getContext();
-        _rootView = inflater.inflate(R.layout.fragment_camara,container,false);
+        _rootView = inflater.inflate(R.layout.fragment_previo_camara_fragmet,container,false);
         _mInicializaElementos();
         setHasOptionsMenu(true);
 
         // Inflate the layout for this fragment
         return _rootView;
     }
-/*
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_camarafragment,menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //return super.onOptionsItemSelected(item);
-        switch (item.getItemId()){
-            case R.id.action_Galeria:
-                mAbrirGaleria();
-                return false;
-            default:
-                break;
+    /*
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.menu_camarafragment,menu);
+            super.onCreateOptionsMenu(menu, inflater);
         }
-        return false;
-    }
-*/
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            //return super.onOptionsItemSelected(item);
+            switch (item.getItemId()){
+                case R.id.action_Galeria:
+                    mAbrirGaleria();
+                    return false;
+                default:
+                    break;
+            }
+            return false;
+        }
+    */
     private void _mInicializaElementos(){
         try{
             //Inicializa boton Enviar
             _btnEnviar = (ImageButton)
-                    _rootView.findViewById(R.id.btnEnviar);
+                    _rootView.findViewById(R.id.btnEnviarprevio);
 
             _btnEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,7 +100,7 @@ public class CamaraFragment extends Fragment {
                         if (Comun.isEmpty(_txtKB.getText().toString())) {
                             if(_newFile !=null) {
                                 if (_newFile.exists()) {
-                                    EnviaDatos Enviar = new EnviaDatos(_context, _Imagen,null);
+                                    EnviaDatos Enviar = new EnviaDatos(_context,_Imagen,null);
                                     Enviar.EnviaDatosImagenes();
 
                                 } else {
@@ -111,7 +110,7 @@ public class CamaraFragment extends Fragment {
                                 Comun.MessageBox(_context, "No existe la fotografia");
                             }
                         } else {
-                            Comun.MessageBox(_context, "Ingrese el KB");
+                            Comun.MessageBox(_context, "Ingrese el Previo correspondiente");
                         }
                     }catch (Exception e){
                         Log.e("FotosKB", e.toString());
@@ -120,7 +119,7 @@ public class CamaraFragment extends Fragment {
             });
 
             //Inicializa el boton de la camara
-            _btnCamara = (ImageButton) _rootView.findViewById(R.id.btnCamara);
+            _btnCamara = (ImageButton) _rootView.findViewById(R.id.btnCamaraprevio);
             _btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -132,8 +131,8 @@ public class CamaraFragment extends Fragment {
                 }
             });
 
-            _Imagen = (ImageView) _rootView.findViewById(R.id.imgCamara);
-            _txtKB = (EditText) _rootView.findViewById(R.id.txtKB);
+            _Imagen = (ImageView) _rootView.findViewById(R.id.imgCamaraprevio);
+            _txtKB = (EditText) _rootView.findViewById(R.id.txtprevio);
         }catch (Exception e){
             Log.e("FotosKB", e.toString());
         }

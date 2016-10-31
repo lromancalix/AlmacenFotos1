@@ -2,14 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.almacenfotos.almacenfotos1.FotosArriboFragment"
+    tools:context="com.almacenfotos.almacenfotos1.PrevioCamaraFragmet"
     android:layout_margin="0dp"
     android:background="#31352e"
     >
 
 
+
     <ImageView
-        android:id="@+id/imgCamaraarribo"
+        android:id="@+id/imgCamaraprevio"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
@@ -23,7 +24,7 @@
         android:scaleType="fitXY" />
 
     <LinearLayout
-        android:id="@+id/BarraBtnSinBordearribo"
+        android:id="@+id/BarraBtnSinBordeprevio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -35,7 +36,7 @@
         android:layout_marginLeft="5dp"
         android:divider="?android:dividerVertical">
 
-        <ImageButton android:id="@+id/btnCamaraarribo"
+        <ImageButton android:id="@+id/btnCamaraprevio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Camara"
@@ -45,21 +46,22 @@
             style="?android:borderlessButtonStyle"/>
 
         <EditText
-            android:id="@+id/txtKBarribo"
+            android:id="@+id/txtprevio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|start"
-            android:hint="Capture el arribo"
+            android:hint="Capture el numero de previo"
             android:lines="1"
             android:textColor="#fff"
             android:textColorHint="#F2F3F4"
             android:padding="16dp"
             android:layout_weight="2"
+            android:inputType="number"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
 
-        <ImageButton android:id="@+id/btnEnviararribo"
+        <ImageButton android:id="@+id/btnEnviarprevio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Enviar"
@@ -68,7 +70,6 @@
             android:src="@drawable/ic_menu_send"
             style="?android:borderlessButtonStyle"/>
     </LinearLayout>
-
 
 
 </RelativeLayout>

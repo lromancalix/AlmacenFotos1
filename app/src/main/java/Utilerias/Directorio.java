@@ -16,7 +16,7 @@ import java.util.Date;
  */
 
 public class Directorio {
-    private  static final  String _Ruta =Environment.getExternalStorageDirectory().toString();// Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/";
+    private  static final  String _Ruta =Environment.getExternalStorageDirectory().getAbsolutePath();// Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/";
     private static final String _CarpetaPrincipal = "/FotosKB";
     private static final String _CarpetaFotos = "/Fotos";
     private static final String _CarpetaVideos = "/Videos";
@@ -31,6 +31,7 @@ public class Directorio {
     }
 
     public static String _getRutaFotos(){
+        _ValidaDirectorio();
         return _Ruta + _CarpetaPrincipal + _CarpetaFotos + "/" ;
     }
 
@@ -43,7 +44,7 @@ public class Directorio {
      61  * @return photoCode
      62  * */
      @SuppressLint("SimpleDateFormat")
-     public static String getNombreImagen(){
+     public static String _getNombreImagen(){
           SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
           String date = dateFormat.format(new Date() );
           String photoCode = "pic_" + date + ".jpg";

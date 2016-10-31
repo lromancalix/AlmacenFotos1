@@ -1,36 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_arribo"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Fotos Arribo" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Fotos Previo" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Tocken" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Cerrar Sesion" />
-    </group>
+    <item android:title="ARRIBO">
+        <menu>
+            <group android:checkableBehavior="all">
+                <item
+                    android:id="@+id/nav_arribo"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="Camara" />
+                <item
+                    android:id="@+id/menuArrivoGaleria"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Galeria" />
+            </group>
+        </menu>
+
+    </item>
+
+    <item android:title="PREVIO">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/menuPrevioCamara"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="Camara" />
+
+                <item
+                    android:id="@+id/menuPrevioGaleria"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Galeria" />
+            </group>
+        </menu>
+    </item>
+
+
+    <item android:title="SALIDA">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/menuSalidaCamara"
+                    android:icon="@drawable/ic_menu_camera"
+                    android:title="Camara" />
+
+                <item
+                    android:id="@+id/menuSalidaGaleria"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Galeria" />
+            </group>
+        </menu>
+    </item>
+
 
     <item android:title="Otros">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/menuEnvioPendiente"
                 android:icon="@drawable/ic_menu_camera"
                 android:title="Enviar Pendientes" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="Enviar Pendientes" />
+
         </menu>
     </item>
+
+
 
 </menu>

@@ -3,7 +3,7 @@ package Utilerias;
 import android.provider.BaseColumns;
 
 /**
- * Created by Deintec on 01/10/2016.
+ * Created by Deintec on 01/10/2016. hola
  */
 
 public class AlmacenBD  {

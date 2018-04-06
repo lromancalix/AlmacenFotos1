@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.almacenfotos.almacenfotos1.EnvioPendienteFragment"
+    android:layout_margin="0dp"
+    android:padding="6dp"
+    >
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtPendientes"
+        android:text="ARCHIVOS PENDIENTES:"
+        android:textColor="@color/primary_text"
+        />
+
+
+</RelativeLayout>

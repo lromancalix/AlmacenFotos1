@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.almacenfotos.almacenfotos1.CamaraFragment"
+    android:layout_margin="0dp"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="0dp"
+            android:layout_margin="0dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/imgPrevio1"
+                android:background="@color/morado"
+                android:maxHeight="200dp"
+                android:maxWidth="200dp"
+                android:padding="0dp"
+                android:src="@mipmap/ic_image_add"
+                android:scaleType="centerInside"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/imgPrevio2"
+                android:padding="0dp"
+                android:src="@mipmap/ic_image_add"
+                android:scaleType="centerInside"
+                android:background="@color/LavenderBlue"
+                android:elevation="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:padding="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/imgPrevio3"
+                android:src="@mipmap/ic_image_add"
+                android:scaleType="centerInside"
+                android:background="@color/LavenderBlue"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="0dp"
+                android:src="@mipmap/ic_image_add"
+                android:scaleType="centerInside"
+                android:id="@+id/imgPrevio4"
+                android:background="@color/morado"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LLOPrevioGaleria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:alpha="0.7"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:divider="?android:dividerVertical">
+
+
+
+        <EditText
+            android:id="@+id/EdtKBPrevioGaleria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:hint="Aqui la descripcion"
+            android:lines="1"
+            android:textColor="#fff"
+            android:textColorHint="#F2F3F4"
+            android:padding="16dp"
+            android:layout_weight="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+
+        <ImageButton android:id="@+id/btnGaleriaEnviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Enviar"
+            android:background="#7FB3D5"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_send"
+            style="?android:borderlessButtonStyle"/>
+    </LinearLayout>
+
+</RelativeLayout>

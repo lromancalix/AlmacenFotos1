@@ -36,7 +36,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FotosArriboFragment extends Fragment {
+public class SalidaCamaraFragment extends Fragment {
 
     View _rootView;
     Context _context;
@@ -52,7 +52,7 @@ public class FotosArriboFragment extends Fragment {
 
     //private PhotoUtils photoUtils;
 
-    public FotosArriboFragment() {
+    public SalidaCamaraFragment() {
         // Required empty public constructor
     }
 
@@ -61,7 +61,7 @@ public class FotosArriboFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         _context = container.getContext();
-        _rootView = inflater.inflate(R.layout.fragment_fotos_arribo,container,false);
+        _rootView = inflater.inflate(R.layout.fragment_salida_camara,container,false);
         _mInicializaElementos();
         setHasOptionsMenu(true);
 
@@ -92,7 +92,7 @@ public class FotosArriboFragment extends Fragment {
         try{
             //Inicializa boton Enviar
             _btnEnviar = (ImageButton)
-                    _rootView.findViewById(R.id.btnEnviararribo);
+                    _rootView.findViewById(R.id.btnEnviarsalida);
 
             _btnEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,7 +111,7 @@ public class FotosArriboFragment extends Fragment {
                                 Comun.MessageBox(_context, "No existe la fotografia");
                             }
                         } else {
-                            Comun.MessageBox(_context, "Ingrese el KB");
+                            Comun.MessageBox(_context, "Ingrese el numero de Salida");
                         }
                     }catch (Exception e){
                         Log.e("FotosKB", e.toString());
@@ -120,7 +120,7 @@ public class FotosArriboFragment extends Fragment {
             });
 
             //Inicializa el boton de la camara
-            _btnCamara = (ImageButton) _rootView.findViewById(R.id.btnCamaraarribo);
+            _btnCamara = (ImageButton) _rootView.findViewById(R.id.btnCamarasalida);
             _btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -132,17 +132,15 @@ public class FotosArriboFragment extends Fragment {
                 }
             });
 
-            _Imagen = (ImageView) _rootView.findViewById(R.id.imgCamaraarribo);
-            _txtKB = (EditText) _rootView.findViewById(R.id.txtKBarribo);
+            _Imagen = (ImageView) _rootView.findViewById(R.id.imgCamarasalida);
+            _txtKB = (EditText) _rootView.findViewById(R.id.txtsalida);
         }catch (Exception e){
             Log.e("FotosKB", e.toString());
         }
     }
 
     private void mAbrirCamara(){
-       // Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         _newFile = null;
         try{
             _Directorio = Directorio._getRutaFotos() + Directorio._getNombreImagen();

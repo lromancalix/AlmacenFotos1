@@ -7,17 +7,6 @@
     android:background="#31352e"
     >
 
-<!--
-    <ImageView
-        android:id="@+id/imgCamara"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="0dp"
-        android:background="#fff"
-        android:padding="0dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
--->
 
     <ImageView
         android:id="@+id/imgCamara"
@@ -40,28 +29,41 @@
         android:orientation="horizontal"
         android:showDividers="middle"
         android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:alpha="0.7"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:divider="?android:dividerVertical">
 
+        <ImageButton android:id="@+id/btnCamara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Camara"
+            android:background="#7DCEA0"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_camera"
+            style="?android:borderlessButtonStyle"/>
+
         <EditText
-            android:id="@+id/txtDescripcion"
+            android:id="@+id/txtKB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000"
-            android:alpha="0.7"
             android:gravity="top|start"
             android:hint="Aqui la descripcion"
             android:lines="1"
             android:textColor="#fff"
             android:textColorHint="#F2F3F4"
             android:padding="16dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
 
         <ImageButton android:id="@+id/btnEnviar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Enviar"
-            android:background="#D0D3D4"
+            android:background="#7FB3D5"
             android:layout_weight="1"
             android:src="@drawable/ic_menu_send"
             style="?android:borderlessButtonStyle"/>

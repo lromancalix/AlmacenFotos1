@@ -1,52 +1,74 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.almacenfotos.almacenfotos1.FotosArriboFragment"
-    android:id="@+id/llFoto"
+    android:layout_margin="0dp"
+    android:background="#31352e"
     >
 
-    <!-- TODO: Update blank fragment layout -->
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imagenArribo"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1"/>
+    <ImageView
+        android:id="@+id/imgCamaraarribo"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="0dp"
+        android:background="#fff"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="3dp"
+        android:scaleType="fitXY" />
 
     <LinearLayout
+        android:id="@+id/BarraBtnSinBordearribo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:alpha="0.7"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:divider="?android:dividerVertical">
+
+        <ImageButton android:id="@+id/btnCamaraarribo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Camara"
+            android:background="#7DCEA0"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_camera"
+            style="?android:borderlessButtonStyle"/>
 
         <EditText
+            android:id="@+id/txtKBarribo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:hint="Capture el arribo"
+            android:lines="1"
+            android:textColor="#fff"
+            android:textColorHint="#F2F3F4"
+            android:padding="16dp"
+            android:layout_weight="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Camara" />
 
-            <Button
-                android:id="@+id/btnGuardarFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Guardar" />
-        </LinearLayout>
+        <ImageButton android:id="@+id/btnEnviararribo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Enviar"
+            android:background="#7FB3D5"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_send"
+            style="?android:borderlessButtonStyle"/>
     </LinearLayout>
 
 
-</LinearLayout>
+
+</RelativeLayout>

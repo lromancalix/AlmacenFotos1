@@ -10,7 +10,7 @@ public class AlmacenBD  {
 
     public static abstract  class TablaDatos implements BaseColumns {
         /**
-         * Nombre de la tabla
+         * Nombre de la tabla calix
          */
         public static final String _nombreTabla ="tblDatos";
         /**
@@ -25,7 +25,7 @@ public class AlmacenBD  {
          * Tipo de datos: Text.
          * Nombre de la columna: descripcion
          */
-        public static final String _descripcion = "descripcion";
+        public static final String _kb = "kb";
         /**
          * _estatus: Identifica si los datos ya fueron o no enviados.
          * Tipo de datos: Integer.

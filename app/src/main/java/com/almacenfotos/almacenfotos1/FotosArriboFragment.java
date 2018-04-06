@@ -4,25 +4,34 @@ package com.almacenfotos.almacenfotos1;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
-import Utilerias.DatosBDHelper;
+import Utilerias.Comun;
 import Utilerias.DatosCaptura;
 import Utilerias.Directorio;
+import Utilerias.EnviaDatos;
+
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,18 +39,18 @@ import Utilerias.Directorio;
 public class FotosArriboFragment extends Fragment {
 
     View _rootView;
-    Button _btnCamara;
-    Button _btnGuardaImagen;
-    ImageView _Imagen;
-    Bitmap _ImagenBitmap;
     Context _context;
-    LinearLayout _llFoto;
+    ImageView _Imagen;
+    ImageButton _btnEnviar;
+    ImageButton _btnCamara;
+    EditText _txtKB;
+    String _Directorio;
 
-    DatosBDHelper BDHelper;
+    private final int _CapturarImagen = 1;
+    private final int _SeleccionarImagen = 2;
+    File _newFile;
 
-    private static int _CapturarImagen = 1;
-    private static int _SeleccionarImagen = 2;
-    private String name = "";
+    //private PhotoUtils photoUtils;
 
     public FotosArriboFragment() {
         // Required empty public constructor
@@ -51,49 +60,115 @@ public class FotosArriboFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         _context = container.getContext();
-        _rootView = inflater.inflate(R.layout.fragment_fotos_arribo, container, false);
+        _rootView = inflater.inflate(R.layout.fragment_fotos_arribo,container,false);
+        _mInicializaElementos();
+        setHasOptionsMenu(true);
 
-        this._mInicializaElementos();
-
+        // Inflate the layout for this fragment
         return _rootView;
-
     }
+/*
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_camaraarribo,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.action_Galeriaarribo:
+                mAbrirGaleria();
+                return false;
+            default:
+                break;
+        }
+        return false;
+    }*/
 
     private void _mInicializaElementos(){
         try{
-            Button _btnCamara = (Button) _rootView.findViewById(R.id.button1);
-            Button _btnGuardaImagen = (Button) _rootView.findViewById(R.id.btnGuardarFoto);
+            //Inicializa boton Enviar
+            _btnEnviar = (ImageButton)
+                    _rootView.findViewById(R.id.btnEnviararribo);
 
-            LinearLayout _llFoto = (LinearLayout) _rootView.findViewById(R.id.llFoto);
+            _btnEnviar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        if (Comun.isEmpty(_txtKB.getText().toString())) {
+                            if(_newFile !=null) {
+                                if (_newFile.exists()) {
+                                    EnviaDatos Enviar = new EnviaDatos(_context,_Imagen,null);
+                                    Enviar.EnviaDatosImagenes();
 
+                                } else {
+                                    Comun.MessageBox(_context, "No existe la fotografia");
+                                }
+                            }else{
+                                Comun.MessageBox(_context, "No existe la fotografia");
+                            }
+                        } else {
+                            Comun.MessageBox(_context, "Ingrese el KB");
+                        }
+                    }catch (Exception e){
+                        Log.e("FotosKB", e.toString());
+                    }
+                }
+            });
+
+            //Inicializa el boton de la camara
+            _btnCamara = (ImageButton) _rootView.findViewById(R.id.btnCamaraarribo);
             _btnCamara.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(getContext(),"Click en el boton foto", Toast.LENGTH_LONG).show();
-                    _mAbrirCamara();
+                    if(Comun.isEmpty(_txtKB.getText().toString())){
+                        mAbrirCamara();
+                    }else{
+                        Comun.MessageBox(_context,"Ingrese el KB");
+                    }
                 }
             });
 
-            _btnGuardaImagen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mGuardaImagen();
-                }
-            });
-
+            _Imagen = (ImageView) _rootView.findViewById(R.id.imgCamaraarribo);
+            _txtKB = (EditText) _rootView.findViewById(R.id.txtKBarribo);
         }catch (Exception e){
-            Log.e("calix", e.toString());
+            Log.e("FotosKB", e.toString());
         }
     }
 
-    private void _mAbrirCamara(){
-        int code = _CapturarImagen;
-        Intent intent =  new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //Uri output = Uri.fromFile(new File(name));
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, output);
-        startActivityForResult(intent,code);
+    private void mAbrirCamara(){
+       // Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        _newFile = null;
+        try{
+            _Directorio = Directorio._getRutaFotos() + Directorio._getNombreImagen();
+            _newFile = new File( Directorio._getRutaFotos(), Directorio._getNombreImagen());
+        }catch (Exception e){
+
+        }
+        intent.putExtra(
+                MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(_newFile));
+        startActivityForResult(intent,
+                _CapturarImagen);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    private void mAbrirGaleria(){
+        Intent intent = new Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(intent.createChooser(intent,"Selecciona imagen"), _SeleccionarImagen);
     }
 
     /**
@@ -105,64 +180,45 @@ public class FotosArriboFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(getContext(),String.valueOf(requestCode) , Toast.LENGTH_LONG).show();
-        if(requestCode == _CapturarImagen){
-            _Imagen = (ImageView)_rootView.findViewById(R.id.imagenArribo);
-            _Imagen.setImageBitmap((Bitmap) data.getParcelableExtra("data"));
-            _ImagenBitmap = ((BitmapDrawable) _Imagen.getDrawable()).getBitmap();
 
-            _llFoto.getBackground();
-        }
-    }
-
-    /**
-     * Metodo para guardar imagen en la memoria externa
-     */
-    private void mGuardaImagen(){
         try {
+            switch (requestCode) {
+                case _CapturarImagen:
+                    if (resultCode == RESULT_OK) {
+                        if (data!=null) {
+                            Uri uriImagen = Uri.fromFile(_newFile);
+                            _Imagen.setImageURI(uriImagen);
+                        }else{
+                            Uri uriImagen = Uri.fromFile(_newFile);
+                            _Imagen.setImageURI(uriImagen);
+                        }
 
+                        GuardarDatos();
+                    }
+                    break;
+                case _SeleccionarImagen:
+                    if (resultCode == RESULT_OK) {
 
-
-            File dirFoto = new File(Directorio._getRutaFotos());
-
-            try{
-                File archivoFoto = new File(dirFoto , Directorio.getNombreImagen());
-                FileOutputStream fOutput = new FileOutputStream(archivoFoto);
-                _ImagenBitmap.compress(Bitmap.CompressFormat.JPEG , 100 , fOutput);
-
-
-                fOutput.flush();
-                Log.i("FotosKB","Foto guardada");
-
-                this.mGuardarDatos("ruta");
-
-            }catch (Exception e){
-                Log.e("FotosKB",e.toString());
-                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        Uri path = data.getData();
+                        _Imagen.setImageURI(path);
+                        _newFile = new File(path.toString());
+                    }
+                    break;
             }
-
         }catch (Exception e){
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+            Log.i("FotosKB", "onActivityResult "+e.toString() );
         }
     }
 
-    private void mGuardarDatos(String ruta){
-
-        BDHelper = new DatosBDHelper(_context);
-        DatosCaptura datos = new DatosCaptura();
-
-        datos.setArray("array");
-        datos.setDescripcion("descripcion");
-        datos.setEstatus("0");
-        datos.setRuta(ruta);
-        datos.setTipo("Foto");
-
-        if(BDHelper._InsertaDatos(datos)){
-            Toast.makeText(getContext(),"Datos guardados!!", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(getContext(),"Ocurrio un error al guardar los datos", Toast.LENGTH_LONG).show();
+    private void GuardarDatos(){
+        try {
+            DatosCaptura datosCaptura = new DatosCaptura();
+            datosCaptura.setDescripcion(_txtKB.getText().toString().trim());
+            datosCaptura.setRuta(_newFile.getAbsolutePath().toString());
+            datosCaptura.setTipo("1");
+            Comun.InsertaDatos(_context,datosCaptura);
+        }catch (Exception e){
+            Log.e("FotosKB", "Guarda Datos " + e.toString());
         }
     }
-
-
 }

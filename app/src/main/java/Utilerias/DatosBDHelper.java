@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Deintec on 01/10/2016.
  */
@@ -14,7 +17,7 @@ import android.util.Log;
 public class DatosBDHelper extends SQLiteOpenHelper {
 
     public static final int _Version = 1;
-    public static final String _NombreBD = "Almacen.db";
+    public static final String _NombreBD ="Almacen.db";
 
     public DatosBDHelper(Context context) {
         super(context, _NombreBD, null, _Version);
@@ -26,11 +29,11 @@ public class DatosBDHelper extends SQLiteOpenHelper {
                 + AlmacenBD.TablaDatos._nombreTabla
                 + " ( "
                 + AlmacenBD.TablaDatos._idElemento + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + AlmacenBD.TablaDatos._descripcion + " TEXT NOT NULL,"
-                + AlmacenBD.TablaDatos._estatus + " INTEGER NOT NULL,"
+                + AlmacenBD.TablaDatos._kb + " TEXT NOT NULL,"
+                //+ AlmacenBD.TablaDatos._estatus + " INTEGER NOT NULL,"
                 + AlmacenBD.TablaDatos._tipo + " TEXT NOT NULL,"
-                + AlmacenBD.TablaDatos._ruta + " TEXT NOT NULL,"
-                + AlmacenBD.TablaDatos._archivoBytes + " TEXT NOT NULL"
+                + AlmacenBD.TablaDatos._ruta + " TEXT NOT NULL"
+                //+ AlmacenBD.TablaDatos._archivoBytes + " TEXT NOT NULL"
                // + "UNIQUE(" + AlmacenBD.TablaDatos._idElemento + ")"
                 + ");";
         db.execSQL(sql);
@@ -47,33 +50,55 @@ public class DatosBDHelper extends SQLiteOpenHelper {
         boolean regresa = true;
         try{
             ContentValues valor = new ContentValues();
-            valor.put(AlmacenBD.TablaDatos._archivoBytes, datos.getArray());
-            valor.put(AlmacenBD.TablaDatos._descripcion, datos.getDescripcion());
-            valor.put(AlmacenBD.TablaDatos._estatus, datos.getEstatus());
+            //valor.put(AlmacenBD.TablaDatos._archivoBytes, datos.getArray());
+            valor.put(AlmacenBD.TablaDatos._kb, datos.getDescripcion());
+            //valor.put(AlmacenBD.TablaDatos._estatus, datos.getEstatus());
             valor.put(AlmacenBD.TablaDatos._ruta, datos.getRuta());
             valor.put(AlmacenBD.TablaDatos._tipo, datos.getTipo());
 
             this.getWritableDatabase().insert(AlmacenBD.TablaDatos._nombreTabla, null, valor);
+
             this.close();
 
         }catch (Exception e){
             regresa = false;
-            Log.e("FotosKB",e.toString());
+            Log.e("FotosKB","_InsertaDatos "+e.toString());
         }
         return  regresa;
     }
 
-    public Cursor _SelectDatos(){
+    public Cursor _RecuperaDatos(){
+
         Cursor cursor = null;
         this.getReadableDatabase();
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM " + AlmacenBD.TablaDatos._nombreTabla;
+
+        List<DatosCaptura> listaCapturas = new ArrayList<DatosCaptura>();
+
         try{
             cursor = db.rawQuery(sql,null);
+
+
         }catch (Exception e){
             Log.e("FotosKB",e.toString());
         }
 
         return  cursor;
     }
+    public boolean _BorraRegistro(DatosCaptura datos){
+        boolean regresa = true;
+        try{
+            String Condicion = "";
+            Condicion = "_idElemento = " + datos.getId();
+            this.getWritableDatabase().delete(AlmacenBD.TablaDatos._nombreTabla,Condicion,null);
+            this.close();
+
+        }catch (Exception e){
+            regresa = false;
+            Log.e("FotosKB","_InsertaDatos "+e.toString());
+        }
+        return  regresa;
+    }
+
 }

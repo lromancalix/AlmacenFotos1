@@ -8,9 +8,10 @@ public class DatosCaptura {
 
     private String descripcion;
     private String ruta;
-    private String array;
+    private String arrayBits;
     private String tipo;
     private String estatus;
+    private String id;
 
     public String getDescripcion() {
         return descripcion;
@@ -28,12 +29,12 @@ public class DatosCaptura {
         this.ruta = ruta;
     }
 
-    public String getArray() {
-        return array;
+    public String getArrayBits() {
+        return arrayBits;
     }
 
-    public void setArray(String array) {
-        this.array = array;
+    public void setArrayBits(String array) {
+        this.arrayBits = array;
     }
 
     public String getTipo() {
@@ -52,5 +53,10 @@ public class DatosCaptura {
         this.estatus = estatus;
     }
 
+    public void setID(String  Id){this.id = Id;}
+
+    public String getId() {
+        return id;
+    }
 
 }
